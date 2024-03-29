@@ -5,9 +5,12 @@ import 'package:education/pages/login/login_page.dart';
 import 'package:education/pages/map/map_page.dart';
 import 'package:education/pages/media/media_page.dart';
 import 'package:education/pages/onboarding/onboarding_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

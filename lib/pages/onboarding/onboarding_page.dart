@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:education/utils/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/background_clipper.dart';
@@ -21,6 +22,27 @@ class _OnboardingPageState extends State<OnboardingPage> {
     'Lorem ipsum dolor sit amet,\nconsectetuer adipsiscing elit,',
     'Lorem ipsum dolor sit amet,\nconsectetuer adipsiscing elit,'
   ];
+
+  late LocalStorage localStorage;
+
+  @override
+  void initState() {
+    localStorage = LocalStorage();
+    getPref();
+    super.initState();
+  }
+
+  void getPref() async {
+    final value = await localStorage.getLocalSotrage();
+    if (value != null) {
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/contact', (route) => false);
+      }
+    }
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,25 +53,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: ClipPath(
               clipper: BackgroundClipper(),
               child: Container(
-                color:  Colors.purple[700],
+                color: Colors.purple[700],
                 // color: const Color.fromARGB(182, 194, 0, 247),
               ),
             ),
           ),
-
-          // Container(
-          //   color: Colors.purple,
-          // ),
-          // Container(
-          //   height: MediaQuery.of(context).size.height,
-          //   width: MediaQuery.of(context).size.width,
-          //   decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //       colors: [Colors.blue, Colors.purple],
-          //       tileMode: TileMode.clamp
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Center(

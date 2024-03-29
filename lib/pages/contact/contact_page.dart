@@ -1,4 +1,5 @@
 import 'package:education/utils/appbar_clipper.dart';
+import 'package:education/utils/local_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/second_appbar_clipper copy.dart';
@@ -11,6 +12,7 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
+  LocalStorage localStorage = LocalStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,10 +218,12 @@ class _ContactPageState extends State<ContactPage> {
           BottomNavigationBarItem(
             icon: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/login');
+                localStorage.removeLocalStorage();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
               },
               child: const Icon(
-                Icons.person,
+                Icons.logout,
                 color: Colors.grey,
               ),
             ),
