@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/background_clipper.dart';
+
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -25,16 +27,29 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.purple, Colors.blue],
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
+            color: Colors.purple[900],
+            child: ClipPath(
+              clipper: BackgroundClipper(),
+              child: Container(
+                color:  Colors.purple[700],
+                // color: const Color.fromARGB(182, 194, 0, 247),
               ),
             ),
           ),
+
+          // Container(
+          //   color: Colors.purple,
+          // ),
+          // Container(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: [Colors.blue, Colors.purple],
+          //       tileMode: TileMode.clamp
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Center(
@@ -130,44 +145,40 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
         ],
       ),
-      bottomSheet: Container(
-        color: Colors.purple,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: currentIndex == 0 ? Colors.white : Colors.grey,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: currentIndex == 1 ? Colors.white : Colors.grey,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: currentIndex == 2 ? Colors.white : Colors.grey,
-                ),
-              ),
-            ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: currentIndex == 0 ? Colors.white : Colors.grey,
+            ),
           ),
-        ),
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: currentIndex == 1 ? Colors.white : Colors.grey,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: currentIndex == 2 ? Colors.white : Colors.grey,
+            ),
+          ),
+        ],
       ),
+      // bottomSheet: ,
     );
   }
 }

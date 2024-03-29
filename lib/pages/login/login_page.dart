@@ -1,5 +1,6 @@
 import 'package:education/pages/widget/custom_form_field.dart';
-import 'package:education/pages/widget/my_clipper.dart';
+import 'package:education/utils/appbar_clipper.dart';
+import 'package:education/utils/second_appbar_clipper%20copy.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,14 +15,24 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: ClipPath(
-              clipper: MyClipper(),
+              clipper: AppBarClipper(),
               child: Container(
-                color: Colors.amber,
+                color: Colors.amber[900],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: ClipPath(
+              clipper: SecondAppBarClipper(),
+              child: Container(
+                color: Colors.amber[800],
               ),
             ),
           ),
@@ -80,17 +91,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/contact');
-                      },
-                      child: const Text(
-                        'Lorem ipsum?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.purple,
-                        ),
+                    const Text(
+                      'Lorem ipsum?',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple,
                       ),
                     ),
                   ],
@@ -106,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
                         backgroundColor: Colors.purple,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/contact');
+                    },
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(

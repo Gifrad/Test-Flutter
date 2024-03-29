@@ -1,5 +1,7 @@
-import 'package:education/pages/widget/my_clipper.dart';
+import 'package:education/utils/appbar_clipper.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/second_appbar_clipper copy.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -17,9 +19,18 @@ class _ContactPageState extends State<ContactPage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: ClipPath(
-              clipper: MyClipper(),
+              clipper: AppBarClipper(),
               child: Container(
-                color: Colors.amber,
+                color: Colors.amber[900],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: ClipPath(
+              clipper: SecondAppBarClipper(),
+              child: Container(
+                color: Colors.amber[800],
               ),
             ),
           ),
@@ -44,15 +55,10 @@ class _ContactPageState extends State<ContactPage> {
                     children: [
                       Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/choice');
-                            },
-                            child: const Icon(
-                              Icons.person,
-                              size: 48,
-                              color: Colors.white,
-                            ),
+                          const Icon(
+                            Icons.person,
+                            size: 48,
+                            color: Colors.white,
                           ),
                           const SizedBox(
                             width: 2,
@@ -79,6 +85,13 @@ class _ContactPageState extends State<ContactPage> {
                                 ),
                               )
                             ],
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/choice');
+                            },
+                            child: const Text('Click'),
                           )
                         ],
                       ),
@@ -241,7 +254,7 @@ class _ContactPageState extends State<ContactPage> {
               onTap: () {
                 Navigator.pushNamed(context, '/media');
               },
-              child:const Icon(
+              child: const Icon(
                 Icons.dashboard_customize_outlined,
                 color: Colors.grey,
               ),

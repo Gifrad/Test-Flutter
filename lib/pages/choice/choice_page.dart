@@ -1,7 +1,8 @@
 import 'package:education/pages/choice/widget/grid_content.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/my_clipper.dart';
+import '../../utils/appbar_clipper.dart';
+import '../../utils/second_appbar_clipper copy.dart';
 
 class ChoicePage extends StatelessWidget {
   const ChoicePage({super.key});
@@ -14,9 +15,18 @@ class ChoicePage extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: ClipPath(
-              clipper: MyClipper(),
+              clipper: AppBarClipper(),
               child: Container(
-                color: Colors.purple,
+                color: Colors.purple[900],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: ClipPath(
+              clipper: SecondAppBarClipper(),
+              child: Container(
+                color: Colors.purple[800],
               ),
             ),
           ),
