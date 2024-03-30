@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:education/services/location_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -11,28 +13,73 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  Location location = Location();
+  double lat = 0;
+  double long = 0;
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  @override
+  void initState() {
+    initial();
+    setState(() {});
+    super.initState();
+  }
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  void initial() async {
+    final prem = await LocationService().handlePermission();
+    if (prem == 'granted') {
+      final currentLocation = await location.getLocation();
+      setState(() {
+        lat = currentLocation.latitude!;
+        long = currentLocation.longitude!;
+      });
+    } else {
+      'false';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
+        markers: {
+          lat == 0
+              ? const Marker(markerId: MarkerId(''))
+              : Marker(
+                  markerId: const MarkerId('1'),
+                  position: LatLng(lat, long),
+                )
+        },
+        initialCameraPosition: CameraPosition(
+          target: lat == 0
+              ? const LatLng(-6.821529, 107.567824)
+              : LatLng(lat, long),
+          zoom: lat == 0 ? 5 : 10,
+        ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 6, bottom: 120),
+          child: FloatingActionButton(
+            mini: true,
+            onPressed: () async {
+              final GoogleMapController controller = await _controller.future;
+              return controller
+                  .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                target: LatLng(lat, long),
+                zoom: 16,
+              )));
+            },
+            child: const Icon(Icons.my_location, size: 24),
+          ),
+        ),
       ),
     );
   }

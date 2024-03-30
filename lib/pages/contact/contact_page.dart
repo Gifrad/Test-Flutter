@@ -1,3 +1,4 @@
+import 'package:education/services/location_service.dart';
 import 'package:education/utils/appbar_clipper.dart';
 import 'package:education/utils/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,13 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
   LocalStorage localStorage = LocalStorage();
+  late LocationService locationService;
+  @override
+  void initState() {
+    locationService = LocationService();
+    locationService.handlePermission();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
