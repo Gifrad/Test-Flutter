@@ -1,3 +1,4 @@
+import 'package:education/bloc/user/user_bloc_bloc.dart';
 import 'package:education/pages/choice/choice_page.dart';
 import 'package:education/pages/contact-user/contact_user_page.dart';
 import 'package:education/pages/contact/contact_page.dart';
@@ -7,11 +8,15 @@ import 'package:education/pages/media/media_page.dart';
 import 'package:education/pages/onboarding/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => UserBlocBloc(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

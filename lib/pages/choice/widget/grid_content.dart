@@ -11,9 +11,9 @@ class GridContent extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           side: const BorderSide(color: Colors.purple)),
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(4),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [

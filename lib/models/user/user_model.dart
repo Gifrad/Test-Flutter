@@ -1,6 +1,6 @@
 class UserModel {
-  String name;
-  String number;
+  final String name;
+  final String number;
 
   UserModel({
     required this.name,

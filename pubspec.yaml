@@ -44,6 +44,8 @@ dependencies:
   firebase_core: ^2.24.2
   shared_preferences: ^2.2.0
   location: ^5.0.3
+  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

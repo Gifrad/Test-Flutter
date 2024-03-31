@@ -145,6 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                         final account = await AuthService().signInWithGoogle();
                         if (account.user != null) {
                           localStorage.saveToLocalStorage(account.user!.email!);
+                          if (mounted) {}
+                          Navigator.pushNamed(context, '/contact');
                         }
                       },
                       child: const Text(
