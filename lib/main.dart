@@ -1,4 +1,6 @@
+import 'package:education/bloc/image/image_bloc.dart';
 import 'package:education/bloc/user/user_bloc_bloc.dart';
+import 'package:education/bloc/video/video_bloc.dart';
 import 'package:education/pages/choice/choice_page.dart';
 import 'package:education/pages/contact-user/contact_user_page.dart';
 import 'package:education/pages/contact/contact_page.dart';
@@ -13,8 +15,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(BlocProvider(
-    create: (context) => UserBlocBloc(),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => UserBlocBloc(),
+      ),
+      BlocProvider(
+        create: (context) => ImageBloc(),
+      ),
+      BlocProvider(
+        create: (context) => VideoBloc(),
+      ),
+    ],
     child: const MyApp(),
   ));
 }
