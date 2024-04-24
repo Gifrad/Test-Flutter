@@ -1,9 +1,11 @@
+import 'package:education/bloc/data/data_bloc.dart';
 import 'package:education/bloc/image/image_bloc.dart';
 import 'package:education/bloc/user/user_bloc_bloc.dart';
 import 'package:education/bloc/video/video_bloc.dart';
 import 'package:education/pages/choice/choice_page.dart';
 import 'package:education/pages/contact-user/contact_user_page.dart';
 import 'package:education/pages/contact/contact_page.dart';
+import 'package:education/pages/data/data_page.dart';
 import 'package:education/pages/login/login_page.dart';
 import 'package:education/pages/map/map_page.dart';
 import 'package:education/pages/media/media_page.dart';
@@ -25,6 +27,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => VideoBloc(),
+      ),
+        BlocProvider(
+        create: (context) => DataBloc(),
       ),
     ],
     child: const MyApp(),
@@ -50,6 +55,7 @@ class MyApp extends StatelessWidget {
         '/map': (context) => const MapPage(),
         '/media': (context) => const MediaPage(),
         '/contact-user': (context) => const ContactUserPage(),
+        '/data': (context) => const DataPage(),
       },
     );
   }

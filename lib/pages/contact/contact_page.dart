@@ -21,6 +21,7 @@ class _ContactPageState extends State<ContactPage> {
     locationService.handlePermission();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -267,16 +268,21 @@ class _ContactPageState extends State<ContactPage> {
                 Navigator.pushNamed(context, '/media');
               },
               child: const Icon(
-                Icons.dashboard_customize_outlined,
+                Icons.filter,
                 color: Colors.grey,
               ),
             ),
             label: '',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.data_exploration_sharp,
-              color: Colors.grey,
+          BottomNavigationBarItem(
+            icon: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/data');
+              },
+              child: const Icon(
+                Icons.dashboard_customize_outlined,
+                color: Colors.grey,
+              ),
             ),
             label: '',
           ),
